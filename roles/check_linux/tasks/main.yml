@@ -1,0 +1,4 @@
+---
+- include: check_linux.yml
+  tags:
+    - test

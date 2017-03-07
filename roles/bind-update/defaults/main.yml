@@ -1,0 +1,18 @@
+---
+#ディレクトリ
+HOME_DIR: '/home/{{ ansible_ssh_user }}'
+BACKUP_DIR: '{{HOME_DIR}}/backup.d'
+FILES_DIR: '{{BACKUP_DIR}}/files'
+RPMS_DIR: '{{BACKUP_DIR}}/rpms'
+DIFF_DIR: '{{BACKUP_DIR}}/diff'
+DNSPERF_DIR: '{{BACKUP_DIR}}/dnsperf'
+PACKAGES_DIR: '{{HOME_DIR}}/pakages'
+#ファイル
+NAMEDCONF: /etc/named.conf
+NAMEDCA: /var/named/named.ca
+#ログ
+NAMEDRUN: /var/named/data/named.run
+MESSAGES: /var/log/messages
+#パッケージ
+UPDATE_RPM: bind
+DOWNGRADE_RPM: ''

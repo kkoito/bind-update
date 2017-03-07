@@ -1,0 +1,31 @@
+---
+- name: Check hostname
+  shell: echo `hostname`
+  tags:
+    - test
+
+- name: Show IP Address
+  shell: /sbin/ip addr show
+  tags:
+    - test
+
+- name: test ansible_ssh_user
+  shell: echo {{ ansible_ssh_user }} 
+  tags:
+    - test
+
+- name: setup ansible_user_dir
+  shell: echo {{ REMOTE_USER_DIR }}
+  tags:
+    - test
+
+- name: setup
+  setup:
+  register: setup_result
+  tags:
+    - test
+
+- name: debug
+  debug: var=setup_result
+  tags:
+    - test

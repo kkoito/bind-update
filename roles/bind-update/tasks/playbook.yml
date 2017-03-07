@@ -1,0 +1,5 @@
+---
+- name: "Play : Update BIND pakages"
+  yum: name={{ UPDATE_RPM }} state=latest
+  tags:
+    - playbook

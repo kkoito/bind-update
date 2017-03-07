@@ -1,0 +1,16 @@
+---
+- name : 'BIND Security Update Playbook'
+  become: yes
+  hosts: all
+  connection: local
+
+  pre_tasks:
+    - shell: echo 'Start Playbook.'
+
+  roles:
+   - check_linux
+   - common
+   - bind-update
+
+  post_tasks:
+    - shell: echo 'All Success.'

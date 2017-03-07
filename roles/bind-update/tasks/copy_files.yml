@@ -1,0 +1,25 @@
+---
+- name: "Copy : Get bind version"
+  shell: "rpm -qa|grep bind|sort > {{ FILES_DIR }}/bind_version.txt"
+  tags:
+    - copy
+
+- name: "Copy : Copy named.conf"
+  shell: cp {{ NAMEDCONF }} {{ FILES_DIR }}/named.conf
+  tags:
+    - copy
+
+- name: "Default : Copy named.ca"
+  shell: cp {{ NAMEDCA }} {{ FILES_DIR }}/named.ca
+  tags:
+    - copy
+
+- name: "Default : Copy named.run"
+  shell: cp {{ NAMEDRUN }} {{ FILES_DIR }}/named.run
+  tags:
+    - copy
+
+- name: "Default : Copy messages"
+  shell: cp {{ MESSAGES }} {{ FILES_DIR }}/messages
+  tags:
+    - copy

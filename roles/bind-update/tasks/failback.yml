@@ -1,0 +1,5 @@
+---
+- name: "Failback : Downgrade BIND pakages"
+  shell: "yum -y downgrade bind bind-libs bind-utils"
+  tags:
+    - failback

@@ -1,0 +1,8 @@
+git install
+# vi /etc/sudoers
+Defaults    requiretty
+↓
+※ コメントアウトする
+# Defaults    requiretty
+mail.shは自分で作る
+使い方

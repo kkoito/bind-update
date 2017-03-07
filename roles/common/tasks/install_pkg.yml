@@ -1,0 +1,5 @@
+---
+- name: "Install : Install dnsperf pakages"
+  yum: name={{ UPDATE_RPM }} state=latest
+  tags:
+    - install

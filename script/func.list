@@ -1,0 +1,48 @@
+#関数一覧
+#ファイルリネーム
+fun_mv(){
+        sudo mv ${FILES_DIR}/messages ${FILES_DIR}/${i}-messages
+        sudo mv ${FILES_DIR}/bind_version.txt ${FILES_DIR}/${i}-bind_version.txt
+        sudo mv ${FILES_DIR}/named.ca ${FILES_DIR}/${i}-named.ca
+        sudo mv ${FILES_DIR}/named.conf ${FILES_DIR}/${i}-named.conf
+        sudo mv ${FILES_DIR}/named.run ${FILES_DIR}/${i}-named.run
+}
+
+#差分チェック
+fun_diff(){
+        sudo diff ${FILES_DIR}/messages ${FILES_DIR}/${i}-messages > ${DIFF_DIR}/${i}_diff-messages
+        sudo diff ${FILES_DIR}/bind_version.txt ${FILES_DIR}/${i}-bind_version.txt > ${DIFF_DIR}/${i}_diff-bind_version.txt
+        sudo diff ${FILES_DIR}/named.ca ${FILES_DIR}/${i}-named.ca > ${DIFF_DIR}/${i}_diff-named.ca
+        sudo diff ${FILES_DIR}/named.conf ${FILES_DIR}/${i}-named.conf > ${DIFF_DIR}/${i}_diff-named.conf
+        sudo diff ${FILES_DIR}/named.run ${FILES_DIR}/${i}-named.run > ${DIFF_DIR}/${i}_diff-named.run
+}
+#Dig実行
+fun_dig(){
+	RESULT1=`dig ${DOMAIN1} @localhost +short|wc -l`
+	RESULT2=`dig ${DOMAIN2} @localhost +short|wc -l`
+	if [ ${RESULT1} -ge 1 ]
+	then
+		echo "  OK : count-${i} : Success dig command at ${DOMAIN1}" >> ${LOG}
+	else
+		echo "  NG : count-${i} : Miss dig command at ${DOMAIN1}" >> ${LOG}
+        	exit 1
+fi
+
+	if [ ${RESULT2} -ge 1 ]
+	then
+		echo "  OK : count-${i} : Success dig command at ${DOMAIN2}" >> ${LOG}
+	else
+		echo "  NG : count-${i} : Miss dig command at ${DOMAIN2}" >> ${LOG}
+		exit 1
+	fi
+}
+
+fun_wget(){
+	BIND_VER=`rpm -qa|grep bind-[0-9]`
+	BINDLIBS_VER=`rpm -qa|grep bind-libs`
+	BINDUTILS_VER=`rpm -qa|grep bind-utils`
+	
+	wget -t 3 ${URL}/${BIND_VER}.rpm -P ${RPMS_DIR}
+	wget -t 3 ${URL}/${BINDLIBS_VER}.rpm -P ${RPMS_DIR}
+	wget -t 3 ${URL}/${BINDUTILS_VER}.rpm -P ${RPMS_DIR}
+}

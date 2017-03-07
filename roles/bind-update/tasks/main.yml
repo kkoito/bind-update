@@ -1,0 +1,16 @@
+---
+- include: make_dir.yml
+  tags:
+    - default
+
+- include: copy_files.yml
+  tags:
+    - copy
+
+- include: playbook.yml
+  tags:
+    - playbook
+
+- include: failback.yml
+  tags:
+    - failback
